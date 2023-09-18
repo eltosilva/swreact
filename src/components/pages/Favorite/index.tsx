@@ -17,6 +17,7 @@ export function Favorite() {
   }, [])
 
   function fnChangeFavorite(character: ICharacter, fn: Function) {
+
     const isFavorite = !character.isFavorite;
 
     apiService.put(`/characters/${character.id}`, { isFavorite })

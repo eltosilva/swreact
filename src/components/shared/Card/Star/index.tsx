@@ -1,12 +1,21 @@
 import { useState } from 'react';
 import { Svg } from './styles';
+import { useAuth } from '../../../struture/AuthProvider/userAuth.tsx';
 
 export function Star({ isFavorite, changeFavorite }: IPropsStar) {
 
   const [render, setRender] = useState(isFavorite)
+  const { authenticated } = useAuth()
 
+  const fn = () => {
+    if (!authenticated) {
+      alert('Você precisa fazer login, para poder favoritar um personagem!');
+      return;
+    }
+    changeFavorite(() => setRender(!render))
+  }
   return (
-    <Svg isFavorite={render} onClick={() => changeFavorite(() => setRender(!render))} >
+    <Svg isFavorite={render} onClick={fn} >
       <path d="M27.2,14.2c0.2-0.2,0.3-0.5,0.2-0.7c-0.1-0.3-0.3-0.5-0.6-0.5l-5.4-0.7c-0.3-0.2-0.6-0.4-0.8-0.7
                         l-2.4-4.9c-0.1-0.3-0.3-0.4-0.6-0.4c-0.3,0-0.5,0.2-0.6,0.4l-2.5,4.9c-0.2,0.4-0.5,0.6-0.9,0.6L8.3,13c-0.3,0-0.6,0.2-0.6,0.5
                         c-0.1,0.3,0,0.6,0.2,0.7l3.8,3.7c0.3,0.3,0.4,0.7,0.3,1l-0.9,5.3c0,0.3,0.1,0.5,0.3,0.7c0.1,0.1,0.3,0.1,0.4,0.1l0,0
