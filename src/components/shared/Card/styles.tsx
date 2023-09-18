@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { orangeBB8 } from '../colors';
 
 export const CardContainer = styled.div`
+  position:relative;
   padding: 1rem;
 
   figure {
